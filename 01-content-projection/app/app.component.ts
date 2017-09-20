@@ -1,53 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ComponentRef, ViewContainerRef, ComponentFactoryResolver, AfterContentInit } from '@angular/core';
 
+import { AuthFormComponent } from './auth-form/auth-form.component';
 import { User } from './auth-form/auth-form.interface';
 
 @Component({
   selector: 'app-root',
   template: `
+    <button (click)="destroyComponent()">DELETE FORM</button>
     <div>
-      <auth-form 
-        (submitted)="createUser($event)">
-        <h3>Create account</h3>
-        <button type="submit">
-          Welcome
-        </button>
-      </auth-form>
-      <auth-form 
-        (submitted)="loginUser($event)">
-        <h3>Login</h3>
-        <auth-remember 
-          (checked)="rememberUser($event)">
-        </auth-remember>
-
-        <auth-remember 
-          (checked)="rememberUser($event)">
-        </auth-remember>
-
-        <auth-remember 
-          (checked)="rememberUser($event)">
-        </auth-remember>
-        <button type="submit">
-          Login
-        </button>
-      </auth-form>
+      <div #entry> </div>
     </div>
   `
 })
-export class AppComponent {
+export class AppComponent implements AfterContentInit {
 
   rememberMe: boolean = false;
 
+  component: ComponentRef<AuthFormComponent>
+
+  @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
+
+  constructor( 
+    private resolver: ComponentFactoryResolver
+  ) { }
+
+  ngAfterContentInit() {
+    const authFormFactory = this.resolver.resolveComponentFactory(AuthFormComponent);
+    this.component = this.entry.createComponent(authFormFactory);
+    console.log("component.instance",this.component.instance);
+    this.component.instance.title = 'Create Account';
+    this.component.instance.submitted.subscribe( this.loginUser );
+  }
   rememberUser(remember: boolean) {
     this.rememberMe = remember;
   }
-  
-  createUser(user: User) {
-    console.log('Create account', user, this.rememberMe);
+
+  destroyComponent() {
+    this.component.destroy()
   }
 
   loginUser(user: User) {
-    console.log('Login', user, this.rememberMe);
+    console.log('Login', user);
   }
 
 }
