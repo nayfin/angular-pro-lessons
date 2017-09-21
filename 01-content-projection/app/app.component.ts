@@ -8,43 +8,17 @@ import { User } from './auth-form/auth-form.interface';
   template: `
     <button (click)="destroyComponent()">DELETE FORM</button>
     <div>
-      <ng-container>
+      <ng-container
+      [ngTemplateOutlet]="tmpl">
       
       </ng-container>
-      <template #tmpl let-name let-location="location">
-        {{name}} : {{ location }}
+      <template #tmpl>
+        Nayfin : Grand Rapids, MI
       </template>
     </div>
   `
 })
-export class AppComponent implements AfterContentInit {
+export class AppComponent {
 
-  rememberMe: boolean = false;
-
-  component: ComponentRef<AuthFormComponent>
-
-  @ViewChild('entry', {read: ViewContainerRef}) entry: ViewContainerRef;
-  @ViewChild('tmpl') tmpl: TemplateRef<any>;
-  constructor( 
-    private resolver: ComponentFactoryResolver
-  ) { }
-
-  ngAfterContentInit() {
-    this.entry.createEmbeddedView(this.tmpl, {
-      $implicit: 'Bill Murry',
-      location: 'England, UK'
-    })
-  }
-  rememberUser(remember: boolean) {
-    this.rememberMe = remember;
-  }
-
-  destroyComponent() {
-    this.component.destroy()
-  }
-
-  loginUser(user: User) {
-    console.log('Login', user);
-  }
 
 }
