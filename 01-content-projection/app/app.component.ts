@@ -6,19 +6,23 @@ import { User } from './auth-form/auth-form.interface';
 @Component({
   selector: 'app-root',
   template: `
-    <button (click)="destroyComponent()">DELETE FORM</button>
     <div>
       <ng-container
-      [ngTemplateOutlet]="tmpl">
+      [ngTemplateOutlet]="tmpl"
+      [ngTemplateOutletContext]="ctx">
       
       </ng-container>
-      <template #tmpl>
-        Nayfin : Grand Rapids, MI
+      <template #tmpl let-name let-location="location">
+        {{name}} : {{location}}
       </template>
     </div>
   `
 })
 export class AppComponent {
 
+  ctx = {
+    $implicit: 'Nayfin',
+    location: 'Blue Springs, MI'
+  }
 
 }
