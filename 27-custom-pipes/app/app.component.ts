@@ -12,7 +12,7 @@ interface File {
     <div>
       <div *ngFor="let file of files">
         <p>{{ file.name }}</p>
-        <p>{{ file.size | filesize }}</p>
+        <p>{{ file.size | filesize: 'mebibytes' }}</p>
       </div>
     </div>
   `

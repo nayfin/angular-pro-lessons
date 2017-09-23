@@ -17,4 +17,4 @@ import { AppComponent } from './app.component';
     AppComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }
