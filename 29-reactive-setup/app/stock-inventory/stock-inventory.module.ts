@@ -1,5 +1,7 @@
+import { StockInventoryService } from './services/stock-inventory.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { StockInventoryComponent } from './containers/stock-inventory/stock-inventory.component';
@@ -16,7 +18,11 @@ import { StockBranchComponent } from './components/stock-branch/stock-branch.com
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule,
+  ],
+  providers: [
+    StockInventoryService
   ],
   exports: [
     StockInventoryComponent,

@@ -1,1 +1,13 @@
-{}
+{
+  "cart": [
+    { "product_id": 2, "quantity": 10},
+    { "product_id": 5, "quantity": 40}
+  ],
+  "products": [
+    { "id": 1, "price": 399,  "name": "mac book" },
+    { "id": 2, "price": 23,   "name": "slack book" },
+    { "id": 3, "price": 443,  "name": "hack book" },
+    { "id": 4, "price": 6334, "name": "smac book" },
+    { "id": 5, "price": 3456, "name": "crack book" }
+  ]
+}
