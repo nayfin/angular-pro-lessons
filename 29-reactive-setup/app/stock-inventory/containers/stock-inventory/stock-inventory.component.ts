@@ -85,7 +85,7 @@ export class StockInventoryComponent {
         this.calculateTotal(this.stockControl.value);
         this.stockControl
           .valueChanges
-          .subscribe(val => this.calculateTotal(val))
+          .subscribe(val => this.calculateTotal(val));
       });
 
   }
@@ -93,7 +93,7 @@ export class StockInventoryComponent {
   calculateTotal(value: Item[]) {
     const total = value.reduce((prev, next) => {
       return prev + (next.quantity * this.productMap.get(next.product_id).price);
-    }, 0)
+    }, 0);
     this.total = total;
   }
 

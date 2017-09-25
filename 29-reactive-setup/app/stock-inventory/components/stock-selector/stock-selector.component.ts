@@ -20,6 +20,7 @@ import { Product } from '../../models/product.interface';
           step="10"
           min="10"
           max="1000">
+        <stock-counter></stock-counter>
         <button
           (click)="onAdd()"
           type="button">
@@ -38,5 +39,9 @@ export class StockSelectorComponent {
   @Output() added = new EventEmitter<any>();
   onAdd() {
     this.added.emit(this.parent.get('selector').value)
+    this.parent.get('selector').reset({
+      product_id: '',
+      quantity: 10
+    })
   }
 }
