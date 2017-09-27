@@ -58,7 +58,7 @@ export class StockInventoryComponent {
     }),
     selector: this.createStock({}),
     stock: this.fb.array([])
-  })
+  }, { validator: StockValidators.checkStockExists})
 
   stockControl = this.form.get('stock') as FormArray;
 
